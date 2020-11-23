@@ -3,15 +3,14 @@
 namespace Managers
 {
     [RequireComponent(typeof(SoundManager))]
+    [RequireComponent(typeof(SelectionManager))]
     public class GameManager : MonoBehaviour
     {
         // static instance of GameManager which allows it to be accessed by any other script
         public static GameManager Instance;
 
-        public SoundManager SoundManager
-        {
-            get { return this.gameObject.GetComponent<SoundManager>(); }
-        }
+        public SoundManager SoundManager => this.gameObject.GetComponent<SoundManager>();
+        public SelectionManager SelectionManager => this.gameObject.GetComponent<SelectionManager>();
 
         private void Awake()
         {
