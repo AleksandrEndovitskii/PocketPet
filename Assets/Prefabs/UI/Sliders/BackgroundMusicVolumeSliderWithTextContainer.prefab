@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &4315793018487885005
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2926765880793803047}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8702da4da86e1444aa7ab0e93bc345f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _audioMixer: {fileID: 24100000, guid: 7a567e53aa944c4458948cf463946df9, type: 2}
 --- !u!1001 &5135337428616686324
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20,6 +7,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1551049933754058246, guid: fec5662cf30fb554088170d374f5e415,
+        type: 3}
+      propertyPath: _parameterName
+      value: BackgroundMusicVolume
+      objectReference: {fileID: 0}
     - target: {fileID: 2229598526927512231, guid: fec5662cf30fb554088170d374f5e415,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -178,12 +170,12 @@ PrefabInstance:
     - target: {fileID: 5427393060721226214, guid: fec5662cf30fb554088170d374f5e415,
         type: 3}
       propertyPath: m_text
-      value: MusicVolume
+      value: BackgroundMusicVolume
       objectReference: {fileID: 0}
     - target: {fileID: 5619780438455990337, guid: fec5662cf30fb554088170d374f5e415,
         type: 3}
       propertyPath: m_Name
-      value: MusicVolumeSliderWithTextContainer
+      value: BackgroundMusicVolumeSliderWithTextContainer
       objectReference: {fileID: 0}
     - target: {fileID: 6962887890677666245, guid: fec5662cf30fb554088170d374f5e415,
         type: 3}
@@ -228,9 +220,3 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 328111733847394861, guid: fec5662cf30fb554088170d374f5e415, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fec5662cf30fb554088170d374f5e415, type: 3}
---- !u!1 &2926765880793803047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8059635878601262035, guid: fec5662cf30fb554088170d374f5e415,
-    type: 3}
-  m_PrefabInstance: {fileID: 5135337428616686324}
-  m_PrefabAsset: {fileID: 0}

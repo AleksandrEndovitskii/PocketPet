@@ -5,14 +5,16 @@ using UnityEngine.UI;
 namespace Components.SliderComponents
 {
     [RequireComponent(typeof(Slider))]
-    public class MusicVolumeSliderComponent : MonoBehaviour
+    public class AudioMixerParameterValueSliderComponent : MonoBehaviour
     {
         [SerializeField]
         private AudioMixer _audioMixer;
+        [SerializeField]
+        private string _parameterName;
 
         private void Awake()
         {
-            _audioMixer.GetFloat("MusicVolume", out var value);
+            _audioMixer.GetFloat(_parameterName, out var value);
             this.gameObject.GetComponent<Slider>().value = value;
 
             this.gameObject.GetComponent<Slider>().onValueChanged.AddListener(OnValueChanged);
@@ -24,7 +26,7 @@ namespace Components.SliderComponents
 
         private void OnValueChanged(float value)
         {
-            _audioMixer.SetFloat("MusicVolume", value);
+            _audioMixer.SetFloat(_parameterName, value);
         }
     }
 }

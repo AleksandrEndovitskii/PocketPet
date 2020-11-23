@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1551049933754058246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059635878601262035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8702da4da86e1444aa7ab0e93bc345f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioMixer: {fileID: 24100000, guid: 7a567e53aa944c4458948cf463946df9, type: 2}
+  _parameterName: SoundsVolume
 --- !u!1001 &6295585907594122949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22,19 +36,34 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1558900596062798586, guid: 869df4ea6819e104ca509725c34585fa,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558900596062798586, guid: 869df4ea6819e104ca509725c34585fa,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1919398274377313924, guid: 869df4ea6819e104ca509725c34585fa,
         type: 3}
       propertyPath: m_Name
-      value: SoundVolumeSliderWithTextContainer
+      value: SoundsVolumeSliderWithTextContainer
       objectReference: {fileID: 0}
     - target: {fileID: 2021996646768781091, guid: 869df4ea6819e104ca509725c34585fa,
         type: 3}
       propertyPath: m_text
-      value: SoundVolume
+      value: SoundsVolume
       objectReference: {fileID: 0}
     - target: {fileID: 4035031349653686016, guid: 869df4ea6819e104ca509725c34585fa,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035031349653686016, guid: 869df4ea6819e104ca509725c34585fa,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4402796029242931203, guid: 869df4ea6819e104ca509725c34585fa,
@@ -182,5 +211,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8256308468512145744, guid: 869df4ea6819e104ca509725c34585fa,
+        type: 3}
+      propertyPath: m_MinValue
+      value: -80
+      objectReference: {fileID: 0}
+    - target: {fileID: 8256308468512145744, guid: 869df4ea6819e104ca509725c34585fa,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 869df4ea6819e104ca509725c34585fa, type: 3}
+--- !u!1 &8059635878601262035 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4073503827949507862, guid: 869df4ea6819e104ca509725c34585fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 6295585907594122949}
+  m_PrefabAsset: {fileID: 0}

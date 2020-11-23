@@ -369,14 +369,29 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 412180507101150923, guid: f58292569c739e3499851610dddcc4b9,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 412180507101150923, guid: f58292569c739e3499851610dddcc4b9,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 772678112674353845, guid: f58292569c739e3499851610dddcc4b9,
         type: 3}
       propertyPath: m_Name
-      value: MusicVolumeSliderWithTextContainer
+      value: BackgroundMusicVolumeSliderWithTextContainer
       objectReference: {fileID: 0}
     - target: {fileID: 2874782602236082993, guid: f58292569c739e3499851610dddcc4b9,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2874782602236082993, guid: f58292569c739e3499851610dddcc4b9,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3243673104427975730, guid: f58292569c739e3499851610dddcc4b9,
@@ -906,14 +921,29 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4826796475401737279, guid: fec5662cf30fb554088170d374f5e415,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826796475401737279, guid: fec5662cf30fb554088170d374f5e415,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5619780438455990337, guid: fec5662cf30fb554088170d374f5e415,
         type: 3}
       propertyPath: m_Name
-      value: SoundVolumeSliderWithTextContainer
+      value: SoundsVolumeSliderWithTextContainer
       objectReference: {fileID: 0}
     - target: {fileID: 6962887890677666245, guid: fec5662cf30fb554088170d374f5e415,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6962887890677666245, guid: fec5662cf30fb554088170d374f5e415,
+        type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7658289451748830918, guid: fec5662cf30fb554088170d374f5e415,
