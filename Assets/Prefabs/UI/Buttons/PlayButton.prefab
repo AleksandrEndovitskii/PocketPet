@@ -125,11 +125,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1233923145225620803, guid: fae788d9aff3ce14098588dcd7989484,
-        type: 3}
-      propertyPath: m_text
-      value: Play
-      objectReference: {fileID: 0}
     - target: {fileID: 4715415280127406649, guid: fae788d9aff3ce14098588dcd7989484,
         type: 3}
       propertyPath: m_Name
