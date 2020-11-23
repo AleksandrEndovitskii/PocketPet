@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Managers
 {
@@ -6,9 +7,10 @@ namespace Managers
     {
         [SerializeField] private string _selectableTag = "Selectable";
         [SerializeField] private Material _highlightMaterial;
-        [SerializeField] private Material _defaultMaterial;
 
         private Transform _selectedTransform;
+
+        private Dictionary<Renderer, Material> _rendererOriginalMaterials = new Dictionary<Renderer, Material>();
 
         private void Update()
         {
@@ -17,7 +19,11 @@ namespace Managers
             if (_selectedTransform != null)
             {
                 selectedTransformRenderer = _selectedTransform.GetComponent<Renderer>();
-                selectedTransformRenderer.material = _defaultMaterial;
+
+                var originalMaterial = _rendererOriginalMaterials[selectedTransformRenderer];
+                _rendererOriginalMaterials.Remove(selectedTransformRenderer);
+                selectedTransformRenderer.material = originalMaterial;
+
                 _selectedTransform = null;
             }
 
@@ -39,6 +45,8 @@ namespace Managers
             // hit something with renderer - highlight it
             if (selectedTransformRenderer != null)
             {
+                _rendererOriginalMaterials[selectedTransformRenderer] = selectedTransformRenderer.material;
+
                 selectedTransformRenderer.material = _highlightMaterial;
             }
 
