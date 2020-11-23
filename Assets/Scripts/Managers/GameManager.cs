@@ -12,8 +12,6 @@ namespace Managers
             if (Instance == null)
             {
                 Instance = this;
-
-                DontDestroyOnLoad(gameObject); // sets this to not be destroyed when reloading scene
             }
             else
             {
