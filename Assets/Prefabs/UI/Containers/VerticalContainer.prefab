@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5616748175730309346}
   - component: {fileID: 5616748175730309347}
   m_Layer: 5
-  m_Name: ButtonsContainer
+  m_Name: VerticalContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
-  m_ChildControlHeight: 1
+  m_ChildControlHeight: 0
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
 --- !u!114 &5616748175730309347

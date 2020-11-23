@@ -651,7 +651,22 @@ PrefabInstance:
     - target: {fileID: 5616748175730309345, guid: f287ebe9360bad549abd683e2e8d64a8,
         type: 3}
       propertyPath: m_Name
-      value: ButtonsContainer
+      value: VerticalContainer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616748175730309346, guid: f287ebe9360bad549abd683e2e8d64a8,
+        type: 3}
+      propertyPath: m_ChildForceExpandHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616748175730309346, guid: f287ebe9360bad549abd683e2e8d64a8,
+        type: 3}
+      propertyPath: m_ChildScaleHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5616748175730309346, guid: f287ebe9360bad549abd683e2e8d64a8,
+        type: 3}
+      propertyPath: m_ChildControlHeight
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f287ebe9360bad549abd683e2e8d64a8, type: 3}
