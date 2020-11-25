@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-namespace Components.Character
+namespace Components.CharacterComponents
 {
     public class MouseRotationComponent : MonoBehaviour
     {
+        [SerializeField]
         private float _mouseSensetivity = 100f;
 
         public Transform _playerBody;
