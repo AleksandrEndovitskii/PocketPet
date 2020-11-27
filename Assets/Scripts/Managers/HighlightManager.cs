@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using Components.SelectionComponents;
 using UnityEngine;
+using Utils;
 
 namespace Managers
 {
-    public class HighlightManager : MonoBehaviour
+    public class HighlightManager : MonoBehaviour, IInitilizable
     {
         public Action<SelectableComponent> HighlightedObjectChanged = delegate {  };
 

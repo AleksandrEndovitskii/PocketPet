@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Utils;
 
 namespace Managers
 {
@@ -9,7 +10,7 @@ namespace Managers
     [RequireComponent(typeof(SelectionManager))]
     [RequireComponent(typeof(HighlightManager))]
     [RequireComponent(typeof(InteractionManager))]
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour, IInitilizable
     {
         // static instance of GameManager which allows it to be accessed by any other script
         public static GameManager Instance;

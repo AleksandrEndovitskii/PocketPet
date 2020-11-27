@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using Utils;
 
 namespace Managers
 {
-    public class SoundManager : MonoBehaviour
+    public class SoundManager : MonoBehaviour, IInitilizable
     {
         [SerializeField]
         private AudioSource _backgroundMusicAudioSourcePrefab;

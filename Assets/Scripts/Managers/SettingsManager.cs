@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Utils;
 
 namespace Managers
 {
-    public class SettingsManager : MonoBehaviour
+    public class SettingsManager : MonoBehaviour, IInitilizable
     {
         public event Action<string, float> ValueChanged = delegate { };
 

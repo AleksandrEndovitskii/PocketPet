@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Components.InteractionComponents;
 using Components.SelectionComponents;
 using UnityEngine;
+using Utils;
 
 namespace Managers
 {
-    public class InteractionManager : MonoBehaviour
+    public class InteractionManager : MonoBehaviour, IInitilizable
     {
         public Action<IInteractable> SelectedInteractableChanged = delegate {  };
 
