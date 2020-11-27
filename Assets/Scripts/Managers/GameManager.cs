@@ -2,6 +2,7 @@
 
 namespace Managers
 {
+    [RequireComponent(typeof(SettingsManager))]
     [RequireComponent(typeof(SceneLoadingManager))]
     [RequireComponent(typeof(SoundManager))]
     [RequireComponent(typeof(InputManager))]
@@ -13,6 +14,7 @@ namespace Managers
         // static instance of GameManager which allows it to be accessed by any other script
         public static GameManager Instance;
 
+        public SettingsManager SettingsManager => this.gameObject.GetComponent<SettingsManager>();
         public SceneLoadingManager SceneLoadingManager => this.gameObject.GetComponent<SceneLoadingManager>();
         public SoundManager SoundManager => this.gameObject.GetComponent<SoundManager>();
         public InputManager InputManager => this.gameObject.GetComponent<InputManager>();
@@ -40,6 +42,7 @@ namespace Managers
 
         public void Initialize()
         {
+            SettingsManager.Initialize();
             SoundManager.Initialize();
             HighlightManager.Initialize();
             InteractionManager.Initialize();
