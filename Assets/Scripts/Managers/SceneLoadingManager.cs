@@ -16,9 +16,9 @@ namespace Managers
             while (!asyncOperation.isDone)
             {
                 yield return null;
-
-                Debug.Log($"Scene({sceneName}) async loading is finished");
             }
+
+            Debug.Log($"Scene({sceneName}) async loading is finished");
         }
 
         public void LoadScene(string sceneName)
