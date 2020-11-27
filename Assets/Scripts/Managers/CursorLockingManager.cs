@@ -19,8 +19,8 @@ namespace Managers
         [Serializable]
         public class SceneCursorLockMode
         {
-            public Scene scene;
-            public CursorLockMode cursorLockMode;
+            public string SceneName;
+            public CursorLockMode CursorLockMode;
         }
 
         public CursorLockMode SelectedCursorLockMode
@@ -52,7 +52,7 @@ namespace Managers
 
         private void SceneManagerOnActiveSceneChanged(Scene previousScene, Scene currentScene)
         {
-            if (_sceneCursorLockModes.All(x=>x.scene != currentScene))
+            if (_sceneCursorLockModes.All(x=>x.SceneName != currentScene.name))
             {
                 Debug.LogWarning($"Cursor lock mode for scene({currentScene}) not specified - " +
                                  $"resetting it to default state({_defaultCursorLockMode})");
@@ -62,9 +62,9 @@ namespace Managers
                 return;
             }
 
-            var cursorLockMode = _sceneCursorLockModes.First(x=>x.scene == currentScene);
+            var cursorLockMode = _sceneCursorLockModes.First(x=>x.SceneName == currentScene.name);
 
-            SelectedCursorLockMode = cursorLockMode.cursorLockMode;
+            SelectedCursorLockMode = cursorLockMode.CursorLockMode;
         }
     }
 }

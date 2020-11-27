@@ -106,7 +106,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa4de44ef68443fbba8bbedd9a403e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneCursorLockModes: []
+  _sceneCursorLockModes:
+  - SceneName: Lobby
+    CursorLockMode: 1
+  - SceneName: MainMenu
+    CursorLockMode: 0
+  - SceneName: MiniGame
+    CursorLockMode: 0
   _defaultCursorLockMode: 0
 --- !u!114 &250712300545540448
 MonoBehaviour:
