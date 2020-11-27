@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Managers
 {
@@ -8,6 +9,8 @@ namespace Managers
     {
         public event Action<string, float> ValueChanged = delegate { };
 
+        [SerializeField]
+        private AudioMixer _audioMixer;
         [SerializeField]
         private List<KeyValuePair> _defaultValues = new List<KeyValuePair>();
 
@@ -36,6 +39,9 @@ namespace Managers
 
             PlayerPrefs.SetFloat(key, value);
 
+            //TODO: move logic for audio settings to audio settings manager
+            _audioMixer.SetFloat(key, value);
+
             ValueChanged.Invoke(key, PlayerPrefs.GetFloat(key));
         }
 
@@ -45,7 +51,9 @@ namespace Managers
             {
                 if (!PlayerPrefs.HasKey(keyValuePair.Key))
                 {
-                    PlayerPrefs.SetFloat(keyValuePair.Key, keyValuePair.Value);
+                    Debug.Log($"Value for {keyValuePair.Key} was not specified - resetting it to default value({keyValuePair.Value})");
+
+                    Set(keyValuePair.Key, keyValuePair.Value);
                 }
             }
         }

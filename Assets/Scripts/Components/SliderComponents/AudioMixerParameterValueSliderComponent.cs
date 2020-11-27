@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEngine.Audio;
+﻿using Managers;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Components.SliderComponents
@@ -8,14 +8,12 @@ namespace Components.SliderComponents
     public class AudioMixerParameterValueSliderComponent : MonoBehaviour
     {
         [SerializeField]
-        private AudioMixer _audioMixer;
-        [SerializeField]
         private string _parameterName;
 
         private void Awake()
         {
-            _audioMixer.GetFloat(_parameterName, out var value);
-            this.gameObject.GetComponent<Slider>().value = value;
+            //_audioMixer.GetFloat(_parameterName, out var value);
+            this.gameObject.GetComponent<Slider>().value = GameManager.Instance.SettingsManager.Get(_parameterName);
 
             this.gameObject.GetComponent<Slider>().onValueChanged.AddListener(OnValueChanged);
         }
@@ -26,7 +24,8 @@ namespace Components.SliderComponents
 
         private void OnValueChanged(float value)
         {
-            _audioMixer.SetFloat(_parameterName, value);
+            //_audioMixer.SetFloat(_parameterName, value);
+            GameManager.Instance.SettingsManager.Set(_parameterName, this.gameObject.GetComponent<Slider>().value);
         }
     }
 }

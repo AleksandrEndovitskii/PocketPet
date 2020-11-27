@@ -63,7 +63,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1fc98ef388d4162a57075d8755ebf12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultValues: []
+  _audioMixer: {fileID: 24100000, guid: 7a567e53aa944c4458948cf463946df9, type: 2}
+  _defaultValues:
+  - Key: BackgroundMusicVolume
+    Value: 0
+  - Key: SoundsVolume
+    Value: 0
 --- !u!114 &3196578525837509296
 MonoBehaviour:
   m_ObjectHideFlags: 0
