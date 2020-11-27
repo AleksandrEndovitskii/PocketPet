@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Components.InteractionComponents;
 using UnityEngine;
 
 namespace Managers
@@ -19,6 +20,10 @@ namespace Managers
             {
                 return;
             }
+
+            var interactableComponent = GameManager.Instance.SelectionManager.SelectableComponent.gameObject
+                .GetComponent<IInteractable>();
+            interactableComponent?.Interact();
         }
     }
 }
