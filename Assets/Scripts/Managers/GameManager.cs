@@ -4,8 +4,9 @@ namespace Managers
 {
     [RequireComponent(typeof(SceneLoadingManager))]
     [RequireComponent(typeof(SoundManager))]
-    [RequireComponent(typeof(SelectionManager))]
     [RequireComponent(typeof(InputManager))]
+    [RequireComponent(typeof(SelectionManager))]
+    [RequireComponent(typeof(HighlightManager))]
     [RequireComponent(typeof(InteractionManager))]
     public class GameManager : MonoBehaviour
     {
@@ -14,8 +15,9 @@ namespace Managers
 
         public SceneLoadingManager SceneLoadingManager => this.gameObject.GetComponent<SceneLoadingManager>();
         public SoundManager SoundManager => this.gameObject.GetComponent<SoundManager>();
-        public SelectionManager SelectionManager => this.gameObject.GetComponent<SelectionManager>();
         public InputManager InputManager => this.gameObject.GetComponent<InputManager>();
+        public SelectionManager SelectionManager => this.gameObject.GetComponent<SelectionManager>();
+        public HighlightManager HighlightManager => this.gameObject.GetComponent<HighlightManager>();
         public InteractionManager InteractionManager => this.gameObject.GetComponent<InteractionManager>();
 
         private void Awake()
@@ -39,6 +41,7 @@ namespace Managers
         public void Initialize()
         {
             SoundManager.Initialize();
+            HighlightManager.Initialize();
             InteractionManager.Initialize();
         }
     }
