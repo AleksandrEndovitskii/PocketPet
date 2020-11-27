@@ -12,7 +12,7 @@ namespace Components.GameObjectComponents
         [SerializeField]
         private Transform _parent;
 
-        private List<GameObject> _instances = new List<GameObject>();
+        public List<GameObject> Instances = new List<GameObject>();
 
         private void Awake()
         {
@@ -20,7 +20,7 @@ namespace Components.GameObjectComponents
             {
                 var instance = Instantiate(_prefab, _parent);
 
-                _instances.Add(instance);
+                Instances.Add(instance);
             }
         }
     }

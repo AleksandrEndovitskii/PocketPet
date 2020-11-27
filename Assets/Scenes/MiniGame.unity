@@ -472,6 +472,11 @@ PrefabInstance:
       propertyPath: _parent
       value: 
       objectReference: {fileID: 1438271344}
+    - target: {fileID: 706538549474711490, guid: 3f11d2c8cc2fd7b4b8b2356a7bfc16c5,
+        type: 3}
+      propertyPath: _ballsContainerParent
+      value: 
+      objectReference: {fileID: 1438271344}
     - target: {fileID: 7141497679223260882, guid: 3f11d2c8cc2fd7b4b8b2356a7bfc16c5,
         type: 3}
       propertyPath: m_Name

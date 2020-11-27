@@ -43,5 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b612aa89c376c1479a04e9482dd2f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 2625747528891628877, guid: c2805df86e18b994bba305539982cb15, type: 3}
-  _parent: {fileID: 0}
+  _ballsContainerPrefab: {fileID: 2625747528891628877, guid: c2805df86e18b994bba305539982cb15,
+    type: 3}
+  _ballsContainerParent: {fileID: 0}
+  _startStepsCount: 3
+  _finishStepsCount: 9
+  _autoplayDelayBeforeStartSecondsCount: 1
+  _autoplayDelayBetweenStepsSecondsCount: 1
+  BallsContainerInstance: {fileID: 0}
