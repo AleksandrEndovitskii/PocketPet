@@ -8,7 +8,7 @@ namespace Managers
     {
         [SerializeField] private Material _highlightMaterial;
 
-        private SelectableComponent SelectableComponent
+        public SelectableComponent SelectableComponent
         {
             get
             {
