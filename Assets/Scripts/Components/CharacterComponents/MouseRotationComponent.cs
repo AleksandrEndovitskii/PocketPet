@@ -11,11 +11,6 @@ namespace Components.CharacterComponents
 
         private float _xRotation = 0f;
 
-        private void Start()
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-
         private void Update()
         {
             var mouseX = Input.GetAxis("Mouse X") * _mouseSensetivity * Time.deltaTime;

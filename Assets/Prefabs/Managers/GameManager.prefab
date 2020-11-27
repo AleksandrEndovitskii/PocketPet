@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 9168631012003455740}
   - component: {fileID: 199145236800239890}
-  - component: {fileID: 3314627930556841075}
   - component: {fileID: 3196578525837509296}
+  - component: {fileID: 3314627930556841075}
   - component: {fileID: 2165993232506764384}
+  - component: {fileID: 6441560347434376103}
   - component: {fileID: 250712300545540448}
   - component: {fileID: 5035580891009374828}
   - component: {fileID: 599843811747196057}
@@ -51,6 +52,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2970ba03b14268d46be50cecac16f5f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3196578525837509296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583358112190840174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93345894feae93f40a4becc247ef68db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3314627930556841075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,18 +82,6 @@ MonoBehaviour:
     Value: 0
   - Key: SoundsVolume
     Value: 0
---- !u!114 &3196578525837509296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 583358112190840174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93345894feae93f40a4becc247ef68db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2165993232506764384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +94,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a29b5664c66da4f9ed54936e4d3def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6441560347434376103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583358112190840174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aa4de44ef68443fbba8bbedd9a403e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneCursorLockModes: []
+  _defaultCursorLockMode: 0
 --- !u!114 &250712300545540448
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ namespace Managers
 {
     [RequireComponent(typeof(SettingsManager))]
     [RequireComponent(typeof(SceneLoadingManager))]
+    [RequireComponent(typeof(CursorLockingManager))]
     [RequireComponent(typeof(SoundManager))]
     [RequireComponent(typeof(InputManager))]
     [RequireComponent(typeof(SelectionManager))]
@@ -17,6 +18,7 @@ namespace Managers
 
         public SettingsManager SettingsManager => this.gameObject.GetComponent<SettingsManager>();
         public SceneLoadingManager SceneLoadingManager => this.gameObject.GetComponent<SceneLoadingManager>();
+        public CursorLockingManager CursorLockingManager => this.gameObject.GetComponent<CursorLockingManager>();
         public SoundManager SoundManager => this.gameObject.GetComponent<SoundManager>();
         public InputManager InputManager => this.gameObject.GetComponent<InputManager>();
         public SelectionManager SelectionManager => this.gameObject.GetComponent<SelectionManager>();
@@ -44,6 +46,7 @@ namespace Managers
         public void Initialize()
         {
             SettingsManager.Initialize();
+            CursorLockingManager.Initialize();
             SoundManager.Initialize();
             HighlightManager.Initialize();
             InteractionManager.Initialize();
