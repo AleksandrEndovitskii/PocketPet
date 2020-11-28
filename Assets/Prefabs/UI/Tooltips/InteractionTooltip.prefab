@@ -12,6 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb7ce1994a2f9249b65988314993334, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5532522151239570216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6696516471149458030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f20cc740d5e42347a05ee6b1d0e42da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5514199876627816295
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -127,13 +139,19 @@ PrefabInstance:
     - target: {fileID: 1182355235658358363, guid: c56e6343e0ab8794e8172ec9ae39509b,
         type: 3}
       propertyPath: m_Name
-      value: TooltipContainer
+      value: InteractionTooltip
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c56e6343e0ab8794e8172ec9ae39509b, type: 3}
 --- !u!1 &6696516470376628540 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1182355235658358363, guid: c56e6343e0ab8794e8172ec9ae39509b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5514199876627816295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6696516471149458030 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1182355236359843081, guid: c56e6343e0ab8794e8172ec9ae39509b,
     type: 3}
   m_PrefabInstance: {fileID: 5514199876627816295}
   m_PrefabAsset: {fileID: 0}

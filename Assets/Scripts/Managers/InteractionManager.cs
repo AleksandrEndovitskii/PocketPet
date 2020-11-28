@@ -14,6 +14,8 @@ namespace Managers
         [SerializeField]
         private List<KeyCode> _interactableKeyCodes = new List<KeyCode>();
 
+        public List<KeyCode> InteractableKeyCodes => _interactableKeyCodes;
+
         public IInteractable SelectedInteractable
         {
             get
