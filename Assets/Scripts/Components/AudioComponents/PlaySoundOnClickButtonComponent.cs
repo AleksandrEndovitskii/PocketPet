@@ -10,13 +10,17 @@ namespace Components.AudioComponents
         [SerializeField]
         private AudioClip _audioClip;
 
+        private Button _button;
+
         private void Awake()
         {
-            this.gameObject.GetComponent<Button>().onClick.AddListener(ButtonOnClick);
+            _button = this.gameObject.GetComponent<Button>();
+
+            _button.onClick.AddListener(ButtonOnClick);
         }
         private void OnDestroy()
         {
-            this.gameObject.GetComponent<Button>().onClick.RemoveListener(ButtonOnClick);
+            _button.onClick.RemoveListener(ButtonOnClick);
         }
 
         private void ButtonOnClick()
