@@ -36,7 +36,9 @@ namespace Managers
             }
         }
 
-        public List<IInteractable> TrackingInteractables { get; private set; }
+        public List<IInteractable> TrackingInteractables => _trackingInteractables;
+
+        private List<IInteractable> _trackingInteractables = new List<IInteractable>();
 
         private IInteractable _selectedInteractable;
 
