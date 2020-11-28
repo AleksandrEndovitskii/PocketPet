@@ -10,20 +10,24 @@ namespace Components.AudioComponents
         [SerializeField]
         private string _parameterName;
 
+        private Slider _slider;
+
         private void Awake()
         {
-            this.gameObject.GetComponent<Slider>().value = GameManager.Instance.SettingsManager.Get(_parameterName);
+            _slider = this.gameObject.GetComponent<Slider>();
 
-            this.gameObject.GetComponent<Slider>().onValueChanged.AddListener(OnValueChanged);
+            _slider.value = GameManager.Instance.SettingsManager.Get(_parameterName);
+
+            _slider.onValueChanged.AddListener(OnValueChanged);
         }
         private void OnDestroy()
         {
-            this.gameObject.GetComponent<Slider>().onValueChanged.RemoveListener(OnValueChanged);
+            _slider.onValueChanged.RemoveListener(OnValueChanged);
         }
 
         private void OnValueChanged(float value)
         {
-            GameManager.Instance.SettingsManager.Set(_parameterName, this.gameObject.GetComponent<Slider>().value);
+            GameManager.Instance.SettingsManager.Set(_parameterName, _slider.value);
         }
     }
 }
