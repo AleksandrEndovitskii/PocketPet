@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Components.GameObjectComponents;
 using Components.InteractionComponents;
 using UnityEngine;
@@ -48,6 +49,10 @@ namespace Managers
 
         private bool _isAutoplayOn;
 
+        private List<KeyValuePair<List<KeyValuePair<IInteractable, bool>>, bool>> _sequencesOfInteractables =
+            new List<KeyValuePair<List<KeyValuePair<IInteractable, bool>>, bool>>();
+        private int _currentStepNumber;
+
         private void Awake()
         {
             Initialize();
@@ -60,6 +65,17 @@ namespace Managers
             IsAutoplayOn = false;
 
             BallsContainerInstance = Instantiate(_ballsContainerPrefab, _ballsContainerParent);
+
+            for (var currentStepNumber = _startStepsCount; currentStepNumber <= _finishStepsCount; currentStepNumber++)
+            {
+                var sequenceOfInteractables = new List<KeyValuePair<IInteractable, bool>>();
+                for (var i = 0; i < currentStepNumber; i++)
+                {
+                    var randomInteractable = GetRandomInteractable();
+                    sequenceOfInteractables.Add(new KeyValuePair<IInteractable, bool>(randomInteractable, false));
+                }
+                _sequencesOfInteractables.Add(new KeyValuePair<List<KeyValuePair<IInteractable, bool>>, bool>(sequenceOfInteractables, false));
+            }
         }
 
         private void StartMiniGame()
@@ -67,15 +83,12 @@ namespace Managers
             StartCoroutine(Autoplay());
         }
 
-        private void InteractWithRandomBall()
+        private IInteractable GetRandomInteractable()
         {
             var randomIndex = UnityEngine.Random.Range(0, BallsContainerInstance.Instances.Count);
             var randomBall = BallsContainerInstance.Instances[randomIndex];
-            var randomInteractables = randomBall.GetComponents<IInteractable>();
-            foreach (var randomInteractable in randomInteractables)
-            {
-                randomInteractable.Interact();
-            }
+            var randomInteractable = randomBall.GetComponent<IInteractable>();
+            return randomInteractable;
         }
 
         private IEnumerator Autoplay()
@@ -84,11 +97,14 @@ namespace Managers
 
             yield return new WaitForSeconds(_autoplayDelayBeforeStartSecondsCount);
 
-            for (var i = 0; i < _startStepsCount; i++)
+            foreach (var sequenceOfInteractables in _sequencesOfInteractables)
             {
-                InteractWithRandomBall();
+                foreach (var keyValuePair in sequenceOfInteractables.Key)
+                {
+                    keyValuePair.Key.Interact();
 
-                yield return new WaitForSeconds(_autoplayDelayBetweenStepsSecondsCount);
+                    yield return new WaitForSeconds(_autoplayDelayBetweenStepsSecondsCount);
+                }
             }
 
             IsAutoplayOn = false;
