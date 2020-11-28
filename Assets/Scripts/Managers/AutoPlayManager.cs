@@ -48,9 +48,9 @@ namespace Managers
 
             yield return new WaitForSeconds(_autoplayDelayBeforeStartSecondsCount);
 
-            foreach (var keyValuePair in interactableSequenceModel.Interactables)
+            foreach (var interactableIsInteracted in interactableSequenceModel.Interactables)
             {
-                keyValuePair.Interact();
+                interactableIsInteracted.Interactable.Interact();
 
                 yield return new WaitForSeconds(_autoplayDelayBetweenStepsSecondsCount);
             }

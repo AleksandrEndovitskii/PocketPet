@@ -62,7 +62,32 @@ namespace Managers
 
         private void OnInteracted(IInteractable interactable)
         {
+            Debug.Log("Autoplay has interacted with interactable");
 
+            // interacted via autoplay - do not need to mark it as interacted
+            if (GameManager.Instance.AutoPlayManager.IsAutoplayOn)
+            {
+                return;
+            }
+
+            // all interactable is interacted - game is over
+            if (_miniGameModel.FirstUnInteractedInteractable == null)
+            {
+                return;
+            }
+
+            if (interactable != _miniGameModel.FirstUnInteractedInteractable.Interactable)
+            {
+                Debug.Log("Player has interacted with wrong interactable - restarting last un-played sequence");
+
+                _miniGameModel.FirstUnInteractedSequence.IsInteracted = false;
+
+                return;
+            }
+
+            Debug.Log("Player has interacted with interactable");
+
+            _miniGameModel.FirstUnInteractedInteractable.IsInteracted = true;
         }
 
         private void PlayNextUnPlayedSequence()
@@ -80,7 +105,7 @@ namespace Managers
         private void StartAutoPlayOfNextUnPlayedSequence()
         {
             var unPlayedSequence = _miniGameModel.InteractableSequenceModels.FirstOrDefault(x =>
-                x.IsFullyInteracted == false);
+                x.IsInteracted == false);
             // all interactable sequences was played - game over
             if (unPlayedSequence == null)
             {
