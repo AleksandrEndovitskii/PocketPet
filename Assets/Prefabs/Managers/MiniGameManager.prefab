@@ -48,6 +48,5 @@ MonoBehaviour:
   _ballsContainerParent: {fileID: 0}
   _startStepsCount: 3
   _finishStepsCount: 9
-  _autoplayDelayBeforeStartSecondsCount: 1
-  _autoplayDelayBetweenStepsSecondsCount: 1
+  _delayBeforeStartPlayNextUnPlayedSequenceSecondsCount: 3
   BallsContainerInstance: {fileID: 0}
