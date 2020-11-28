@@ -6,26 +6,26 @@ namespace Managers
 {
     public class SelectionManager : MonoBehaviour
     {
-        public Action<SelectableComponent> SelectableComponentChanged = delegate {  };
+        public Action<SelectableComponent> SelectedObjectChanged = delegate {  };
 
-        public SelectableComponent SelectableComponent
+        public SelectableComponent SelectedObject
         {
             get
             {
-                return _selectableComponent;
+                return _selectedObject;
             }
             set
             {
-                if (_selectableComponent == value)
+                if (_selectedObject == value)
                 {
                     return;
                 }
 
                 var previouslySelectedObjectName = "None";
-                if (_selectableComponent != null &&
-                    _selectableComponent.gameObject != null)
+                if (_selectedObject != null &&
+                    _selectedObject.gameObject != null)
                 {
-                    previouslySelectedObjectName = _selectableComponent.gameObject.name;
+                    previouslySelectedObjectName = _selectedObject.gameObject.name;
                 }
 
                 var currentlySelectedObjectName = "None";
@@ -38,13 +38,13 @@ namespace Managers
                 Debug.Log(
                     $"Selected gameobject changed from {previouslySelectedObjectName} to {currentlySelectedObjectName}");
 
-                _selectableComponent = value;
+                _selectedObject = value;
 
-                SelectableComponentChanged.Invoke(_selectableComponent);
+                SelectedObjectChanged.Invoke(_selectedObject);
             }
         }
 
-        private SelectableComponent _selectableComponent;
+        private SelectableComponent _selectedObject;
 
         private void Update()
         {
@@ -55,7 +55,7 @@ namespace Managers
                 return;
             }
 
-            SelectableComponent = hit.transform.gameObject.GetComponent<SelectableComponent>();
+            SelectedObject = hit.transform.gameObject.GetComponent<SelectableComponent>();
         }
     }
 }

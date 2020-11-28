@@ -37,14 +37,14 @@ namespace Managers
 
         public void Initialize()
         {
-            GameManager.Instance.SelectionManager.SelectableComponentChanged += SelectableComponentChanged;
+            GameManager.Instance.SelectionManager.SelectedObjectChanged += SelectableComponentChanged;
 
             GameManager.Instance.InputManager.KeyPressed += OnKeyPressed;
         }
 
         private void SelectableComponentChanged(SelectableComponent selectableComponent)
         {
-            SelectedInteractable = GameManager.Instance.SelectionManager.SelectableComponent?.gameObject
+            SelectedInteractable = GameManager.Instance.SelectionManager.SelectedObject?.gameObject
                 .GetComponent<IInteractable>();
         }
 

@@ -59,7 +59,7 @@ namespace Managers
 
         public void Initialize()
         {
-            GameManager.Instance.SelectionManager.SelectableComponentChanged += OnSelectableComponentChanged;
+            GameManager.Instance.SelectionManager.SelectedObjectChanged += OnSelectableComponentChanged;
         }
 
         private void OnSelectableComponentChanged(SelectableComponent selectableComponent)
