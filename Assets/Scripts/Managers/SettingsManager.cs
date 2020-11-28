@@ -13,14 +13,7 @@ namespace Managers
         [SerializeField]
         private AudioMixer _audioMixer;
         [SerializeField]
-        private List<KeyValuePair> _defaultValues = new List<KeyValuePair>();
-
-        [Serializable]
-        public class KeyValuePair
-        {
-            public string Key;
-            public float Value;
-        }
+        private List<KeyValue> _defaultValues = new List<KeyValue>();
 
         private AudioSource _backgroundMusicAudioSourceInstance;
         private AudioSource _soundsAudioSourceInstance;

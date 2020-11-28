@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Components.InteractionComponents;
+using Utils;
 
 namespace Models
 {
@@ -27,7 +28,7 @@ namespace Models
 
         public List<InteractableSequenceModel> InteractableSequenceModels => _interactableSequenceModels;
 
-        public InteractableSequenceModel.InteractableIsInteracted FirstUnInteractedInteractable
+        public InteractableIsInteracted FirstUnInteractedInteractable
         {
             get
             {

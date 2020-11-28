@@ -10,7 +10,8 @@ namespace Managers
     {
         public Action<SelectableComponent> HighlightedObjectChanged = delegate {  };
 
-        [SerializeField] private Material _highlightMaterial;
+        [SerializeField]
+        private Material _highlightMaterial;
 
         public SelectableComponent HighlightedObject
         {

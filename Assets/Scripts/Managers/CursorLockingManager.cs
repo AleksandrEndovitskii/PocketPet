@@ -16,13 +16,6 @@ namespace Managers
         [SerializeField]
         private CursorLockMode _defaultCursorLockMode = CursorLockMode.None;
 
-        [Serializable]
-        public class SceneCursorLockMode
-        {
-            public string SceneName;
-            public CursorLockMode CursorLockMode;
-        }
-
         public CursorLockMode SelectedCursorLockMode
         {
             get
