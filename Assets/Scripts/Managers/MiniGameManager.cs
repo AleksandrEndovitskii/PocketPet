@@ -11,8 +11,6 @@ namespace Managers
 {
     public class MiniGameManager : MonoBehaviour, IInitilizable
     {
-        public Action<bool> IsAutoplayOnChanged = delegate {  };
-
         [SerializeField]
         private ObjectsInstantiatingComponent _ballsContainerPrefab;
         [SerializeField]
@@ -21,32 +19,12 @@ namespace Managers
         private int _startStepsCount;
         [SerializeField]
         private int _finishStepsCount;
+        [SerializeField]
+        private float _delayBeforeStartPlayNextUnPlayedSequenceSecondsCount;
 
         public ObjectsInstantiatingComponent BallsContainerInstance;
-        public bool IsAutoplayOn
-        {
-            get
-            {
-                return _isAutoplayOn;
-            }
-            set
-            {
-                if (_isAutoplayOn == value)
-                {
-                    return;
-                }
-
-                Debug.Log($"Mini game autoplay state changed from {_isAutoplayOn} to {value}");
-
-                _isAutoplayOn = value;
-
-                IsAutoplayOnChanged.Invoke(_isAutoplayOn);
-            }
-        }
-
-        private bool _isAutoplayOn;
-
         private MiniGameModel _miniGameModel;
+        private Coroutine _playNextUnPlayedSequenceAfterDelayCoroutine;
 
         private void Awake()
         {
@@ -54,18 +32,11 @@ namespace Managers
 
             Subscribe();
 
-            PlayNextUnPlayedInteractableSequenceModel();
-        }
-
-        private void Subscribe()
-        {
-            GameManager.Instance.AutoPlayManager.IsAutoplayOnChanged += OnIsAutoplayOnChanged;
+            PlayNextUnPlayedSequence();
         }
 
         public void Initialize()
         {
-            IsAutoplayOn = false;
-
             BallsContainerInstance = Instantiate(_ballsContainerPrefab, _ballsContainerParent);
 
             var interactableBlueprints = BallsContainerInstance.Instances.Select(x =>
@@ -73,27 +44,60 @@ namespace Managers
             _miniGameModel = new MiniGameModel(_startStepsCount,_finishStepsCount, interactableBlueprints);
         }
 
-        private void OnIsAutoplayOnChanged(bool isAutoplayOn)
+        private void Subscribe()
         {
-            if (isAutoplayOn == true)
-            {
-                return;
-            }
-
-            PlayNextUnPlayedInteractableSequenceModel();
+            GameManager.Instance.AutoPlayManager.IsAutoplayOnChanged += OnIsAutoplayOnChanged;
+            GameManager.Instance.InteractionManager.Interacted += OnInteracted;
         }
 
-        private void PlayNextUnPlayedInteractableSequenceModel()
+        private void OnIsAutoplayOnChanged(bool isAutoplayOn)
         {
-            var unPlayedInteractableSequenceModel = _miniGameModel.InteractableSequenceModels.FirstOrDefault(x =>
-                x.IsFullyInteracted == false);
-            // all interactable sequences was played - game over
-            if (unPlayedInteractableSequenceModel == null)
+            if (isAutoplayOn)
             {
                 return;
             }
 
-            GameManager.Instance.AutoPlayManager.StartAutoPlay(unPlayedInteractableSequenceModel);
+            PlayNextUnPlayedSequence();
+        }
+
+        private void OnInteracted(IInteractable interactable)
+        {
+
+        }
+
+        private void PlayNextUnPlayedSequence()
+        {
+            if (_playNextUnPlayedSequenceAfterDelayCoroutine != null)
+            {
+                StopCoroutine(_playNextUnPlayedSequenceAfterDelayCoroutine);
+                _playNextUnPlayedSequenceAfterDelayCoroutine = null;
+            }
+
+            _playNextUnPlayedSequenceAfterDelayCoroutine = StartCoroutine(PerformActionAfterTimeCoroutine(
+                _delayBeforeStartPlayNextUnPlayedSequenceSecondsCount, () => { StartAutoPlayOfNextUnPlayedSequence(); }));
+        }
+
+        private void StartAutoPlayOfNextUnPlayedSequence()
+        {
+            var unPlayedSequence = _miniGameModel.InteractableSequenceModels.FirstOrDefault(x =>
+                x.IsFullyInteracted == false);
+            // all interactable sequences was played - game over
+            if (unPlayedSequence == null)
+            {
+                return;
+            }
+
+            GameManager.Instance.AutoPlayManager.StartAutoPlay(unPlayedSequence);
+        }
+
+        private IEnumerator PerformActionAfterTimeCoroutine(float seconds, Action action)
+        {
+            yield return new WaitForSeconds(seconds);
+
+            if (action != null)
+            {
+                action.Invoke();
+            }
         }
     }
 }
