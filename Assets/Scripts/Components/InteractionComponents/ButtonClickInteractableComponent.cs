@@ -1,10 +1,7 @@
-﻿using System;
-using Components.InteractionComponents;
-using Managers;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Components.SceneComponents
+namespace Components.InteractionComponents
 {
     [RequireComponent(typeof(Button))]
     public class ButtonClickInteractableComponent : MonoBehaviour, IInteractable
