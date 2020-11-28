@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using Components.GameObjectComponents;
 using Components.InteractionComponents;
+using Models;
 using UnityEngine;
 using Utils;
 
@@ -49,9 +50,7 @@ namespace Managers
 
         private bool _isAutoplayOn;
 
-        private List<KeyValuePair<List<KeyValuePair<IInteractable, bool>>, bool>> _sequencesOfInteractables =
-            new List<KeyValuePair<List<KeyValuePair<IInteractable, bool>>, bool>>();
-        private int _currentStepNumber;
+        private MiniGameModel _miniGameModel;
 
         private void Awake()
         {
@@ -66,45 +65,35 @@ namespace Managers
 
             BallsContainerInstance = Instantiate(_ballsContainerPrefab, _ballsContainerParent);
 
-            for (var currentStepNumber = _startStepsCount; currentStepNumber <= _finishStepsCount; currentStepNumber++)
-            {
-                var sequenceOfInteractables = new List<KeyValuePair<IInteractable, bool>>();
-                for (var i = 0; i < currentStepNumber; i++)
-                {
-                    var randomInteractable = GetRandomInteractable();
-                    sequenceOfInteractables.Add(new KeyValuePair<IInteractable, bool>(randomInteractable, false));
-                }
-                _sequencesOfInteractables.Add(new KeyValuePair<List<KeyValuePair<IInteractable, bool>>, bool>(sequenceOfInteractables, false));
-            }
+            var interactableBlueprints = BallsContainerInstance.Instances.Select(x =>
+                x.GetComponent<IInteractable>()).ToList();
+            _miniGameModel = new MiniGameModel(_startStepsCount,_finishStepsCount, interactableBlueprints);
         }
 
         private void StartMiniGame()
         {
-            StartCoroutine(Autoplay());
+            var interactableSequenceModel = _miniGameModel.InteractableSequenceModels.FirstOrDefault(x =>
+                x.IsFullyInteracted == false);
+            // no more interactableSequenceModels to interact with - game over
+            if (interactableSequenceModel == null)
+            {
+                return;
+            }
+
+            StartCoroutine(Autoplay(interactableSequenceModel));
         }
 
-        private IInteractable GetRandomInteractable()
-        {
-            var randomIndex = UnityEngine.Random.Range(0, BallsContainerInstance.Instances.Count);
-            var randomBall = BallsContainerInstance.Instances[randomIndex];
-            var randomInteractable = randomBall.GetComponent<IInteractable>();
-            return randomInteractable;
-        }
-
-        private IEnumerator Autoplay()
+        private IEnumerator Autoplay(InteractableSequenceModel interactableSequenceModel)
         {
             IsAutoplayOn = true;
 
             yield return new WaitForSeconds(_autoplayDelayBeforeStartSecondsCount);
 
-            foreach (var sequenceOfInteractables in _sequencesOfInteractables)
+            foreach (var keyValuePair in interactableSequenceModel.Interactables)
             {
-                foreach (var keyValuePair in sequenceOfInteractables.Key)
-                {
-                    keyValuePair.Key.Interact();
+                keyValuePair.Interact();
 
-                    yield return new WaitForSeconds(_autoplayDelayBetweenStepsSecondsCount);
-                }
+                yield return new WaitForSeconds(_autoplayDelayBetweenStepsSecondsCount);
             }
 
             IsAutoplayOn = false;

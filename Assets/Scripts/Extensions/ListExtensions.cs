@@ -8,4 +8,11 @@ public static class ListExtensions
 
         return result;
     }
+
+    public static T GetRandomElement<T>(this List<T> list)
+    {
+        var randomIndex = UnityEngine.Random.Range(0, list.Count);
+        var randomElement = list[randomIndex];
+        return randomElement;
+    }
 }
