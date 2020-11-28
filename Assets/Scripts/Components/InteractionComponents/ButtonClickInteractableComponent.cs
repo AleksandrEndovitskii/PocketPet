@@ -17,7 +17,10 @@ namespace Components.InteractionComponents
         }
         private void OnDestroy()
         {
-            GameManager.Instance.InteractionManager.UnTrackInteractable(this);
+            if (GameManager.Instance.InteractionManager != null)
+            {
+                GameManager.Instance.InteractionManager.UnTrackInteractable(this);
+            }
         }
 
         public void Interact()
