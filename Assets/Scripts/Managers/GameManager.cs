@@ -11,6 +11,7 @@ namespace Managers
     [RequireComponent(typeof(SelectionManager))]
     [RequireComponent(typeof(HighlightManager))]
     [RequireComponent(typeof(InteractionManager))]
+    [RequireComponent(typeof(AutoPlayManager))]
     public class GameManager : MonoBehaviour, IInitilizable
     {
         // static instance of GameManager which allows it to be accessed by any other script
@@ -24,6 +25,7 @@ namespace Managers
         public SelectionManager SelectionManager => this.gameObject.GetComponent<SelectionManager>();
         public HighlightManager HighlightManager => this.gameObject.GetComponent<HighlightManager>();
         public InteractionManager InteractionManager => this.gameObject.GetComponent<InteractionManager>();
+        public AutoPlayManager AutoPlayManager => this.gameObject.GetComponent<AutoPlayManager>();
 
         private void Awake()
         {

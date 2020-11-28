@@ -21,10 +21,6 @@ namespace Managers
         private int _startStepsCount;
         [SerializeField]
         private int _finishStepsCount;
-        [SerializeField]
-        private float _autoplayDelayBeforeStartSecondsCount;
-        [SerializeField]
-        private float _autoplayDelayBetweenStepsSecondsCount;
 
         public ObjectsInstantiatingComponent BallsContainerInstance;
         public bool IsAutoplayOn
@@ -56,7 +52,14 @@ namespace Managers
         {
             Initialize();
 
-            StartMiniGame();
+            Subscribe();
+
+            PlayNextUnPlayedInteractableSequenceModel();
+        }
+
+        private void Subscribe()
+        {
+            GameManager.Instance.AutoPlayManager.IsAutoplayOnChanged += OnIsAutoplayOnChanged;
         }
 
         public void Initialize()
@@ -70,35 +73,27 @@ namespace Managers
             _miniGameModel = new MiniGameModel(_startStepsCount,_finishStepsCount, interactableBlueprints);
         }
 
-        private void StartMiniGame()
+        private void OnIsAutoplayOnChanged(bool isAutoplayOn)
         {
-            var interactableSequenceModel = _miniGameModel.InteractableSequenceModels.FirstOrDefault(x =>
-                x.IsFullyInteracted == false);
-            // no more interactableSequenceModels to interact with - game over
-            if (interactableSequenceModel == null)
+            if (isAutoplayOn == true)
             {
                 return;
             }
 
-            StartCoroutine(Autoplay(interactableSequenceModel));
+            PlayNextUnPlayedInteractableSequenceModel();
         }
 
-        private IEnumerator Autoplay(InteractableSequenceModel interactableSequenceModel)
+        private void PlayNextUnPlayedInteractableSequenceModel()
         {
-            IsAutoplayOn = true;
-
-            yield return new WaitForSeconds(_autoplayDelayBeforeStartSecondsCount);
-
-            foreach (var keyValuePair in interactableSequenceModel.Interactables)
+            var unPlayedInteractableSequenceModel = _miniGameModel.InteractableSequenceModels.FirstOrDefault(x =>
+                x.IsFullyInteracted == false);
+            // all interactable sequences was played - game over
+            if (unPlayedInteractableSequenceModel == null)
             {
-                keyValuePair.Interact();
-
-                yield return new WaitForSeconds(_autoplayDelayBetweenStepsSecondsCount);
+                return;
             }
 
-            IsAutoplayOn = false;
-
-            yield return null;
+            GameManager.Instance.AutoPlayManager.StartAutoPlay(unPlayedInteractableSequenceModel);
         }
     }
 }
