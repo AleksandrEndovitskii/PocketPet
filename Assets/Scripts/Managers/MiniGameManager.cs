@@ -9,7 +9,7 @@ using Utils;
 
 namespace Managers
 {
-    public class MiniGameManager : MonoBehaviour, IInitilizable
+    public class MiniGameManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
         [SerializeField]
         private ObjectsInstantiatingComponent _ballsContainerPrefab;
@@ -33,12 +33,10 @@ namespace Managers
         private void Awake()
         {
             Initialize();
-
-            Subscribe();
-
-            Debug.Log($"Mini game is started");
-
-            RestartPlayingOfNextUnPlayedSequence();
+        }
+        private void OnDestroy()
+        {
+            UnInitialize();
         }
 
         public void Initialize()
@@ -50,17 +48,38 @@ namespace Managers
             var interactableBlueprints = BallsContainerInstance.Instances.Select(x =>
                 x.GetComponent<IInteractable>()).ToList();
             _miniGameModel = new MiniGameModel(_startStepsCount,_finishStepsCount, interactableBlueprints);
+
+            Subscribe();
+
+            Debug.Log($"Mini game is started");
+
+            RestartPlayingOfNextUnPlayedSequence();
+        }
+        public void UnInitialize()
+        {
+            StopPlayingOfNextUnPlayedSequence();
+
+            UnSubscribe();
+
+            Destroy(BallsContainerInstance);
         }
 
         private void Subscribe()
         {
-            GameManager.Instance.AutoPlayManager.IsAutoplayOnChanged += OnIsAutoplayOnChanged;
-            GameManager.Instance.InteractionManager.Interacted += OnInteracted;
+            GameManager.Instance.AutoPlayManager.IsAutoplayOnChanged += AutoPlayManagerOnIsAutoplayOnChanged;
+            GameManager.Instance.InteractionManager.Interacted += InteractionManagerOnInteracted;
 
-            _miniGameModel.IsInteractedChanged += OnIsInteractedChanged;
+            _miniGameModel.IsInteractedChanged += MiniGameModelOnIsInteractedChanged;
+        }
+        private void UnSubscribe()
+        {
+            _miniGameModel.IsInteractedChanged -= MiniGameModelOnIsInteractedChanged;
+
+            GameManager.Instance.InteractionManager.Interacted -= InteractionManagerOnInteracted;
+            GameManager.Instance.AutoPlayManager.IsAutoplayOnChanged -= AutoPlayManagerOnIsAutoplayOnChanged;
         }
 
-        private void OnIsAutoplayOnChanged(bool isAutoplayOn)
+        private void AutoPlayManagerOnIsAutoplayOnChanged(bool isAutoplayOn)
         {
             if (isAutoplayOn)
             {
@@ -69,8 +88,7 @@ namespace Managers
 
             RestartPlayingOfNextUnPlayedSequence();
         }
-
-        private void OnInteracted(IInteractable interactable)
+        private void InteractionManagerOnInteracted(IInteractable interactable)
         {
             // interacted via autoplay - do not need to mark it as interacted
             if (GameManager.Instance.AutoPlayManager.IsAutoplayOn)
@@ -103,8 +121,7 @@ namespace Managers
 
             _miniGameModel.FirstUnInteractedInteractable.IsInteracted = true;
         }
-
-        private void OnIsInteractedChanged(bool isInteracted)
+        private void MiniGameModelOnIsInteractedChanged(bool isInteracted)
         {
             if (!isInteracted)
             {
@@ -118,12 +135,20 @@ namespace Managers
 
         private void RestartPlayingOfNextUnPlayedSequence()
         {
+            StopPlayingOfNextUnPlayedSequence();
+
+            StartPlayingOfNextUnPlayedSequence();
+        }
+        private void StopPlayingOfNextUnPlayedSequence()
+        {
             if (_playNextUnPlayedSequenceAfterDelayCoroutine != null)
             {
                 StopCoroutine(_playNextUnPlayedSequenceAfterDelayCoroutine);
                 _playNextUnPlayedSequenceAfterDelayCoroutine = null;
             }
-
+        }
+        private void StartPlayingOfNextUnPlayedSequence()
+        {
             _playNextUnPlayedSequenceAfterDelayCoroutine = StartCoroutine(PerformActionAfterTimeCoroutine(
                 _delayBeforeStartPlayNextUnPlayedSequenceSecondsCount, () => { StartAutoPlayOfNextUnPlayedSequence(); }));
         }
