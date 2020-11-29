@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Components.InteractionComponents;
+using UnityEngine;
 using Utils;
 
 namespace Models
@@ -78,6 +79,9 @@ namespace Models
             {
                 return;
             }
+
+            Debug.Log($"Mini game model is interacted state changed from {_isInteractedBufferValue} to " +
+                      $"{IsInteracted}");
 
             // update interacted buffer value
             _isInteractedBufferValue = IsInteracted;

@@ -21,6 +21,8 @@ namespace Managers
         private int _finishStepsCount;
         [SerializeField]
         private float _delayBeforeStartPlayNextUnPlayedSequenceSecondsCount;
+        [SerializeField]
+        private string _sceneName;
 
         public ObjectsInstantiatingComponent BallsContainerInstance;
         private MiniGameModel _miniGameModel;
@@ -31,6 +33,8 @@ namespace Managers
             Initialize();
 
             Subscribe();
+
+            Debug.Log($"Mini game is started");
 
             PlayNextUnPlayedSequence();
         }
@@ -48,6 +52,8 @@ namespace Managers
         {
             GameManager.Instance.AutoPlayManager.IsAutoplayOnChanged += OnIsAutoplayOnChanged;
             GameManager.Instance.InteractionManager.Interacted += OnInteracted;
+
+            _miniGameModel.IsInteractedChanged += OnIsInteractedChanged;
         }
 
         private void OnIsAutoplayOnChanged(bool isAutoplayOn)
@@ -88,6 +94,18 @@ namespace Managers
             Debug.Log("Player has interacted with interactable");
 
             _miniGameModel.FirstUnInteractedInteractable.IsInteracted = true;
+        }
+
+        private void OnIsInteractedChanged(bool isInteracted)
+        {
+            if (!isInteracted)
+            {
+                return;
+            }
+
+            Debug.Log($"Mini game is ended");
+
+            GameManager.Instance.SceneLoadingManager.LoadScene(_sceneName);
         }
 
         private void PlayNextUnPlayedSequence()

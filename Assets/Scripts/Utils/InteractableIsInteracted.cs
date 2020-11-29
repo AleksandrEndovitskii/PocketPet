@@ -25,7 +25,7 @@ namespace Utils
 
                 _isInteracted = value;
 
-                Debug.Log($"Is interacted state changed from {_isInteracted} to {value}");
+                Debug.Log($"Interactable is interacted state changed from {_isInteracted} to {value}");
 
                 IsInteractedChanged.Invoke(value);
             }

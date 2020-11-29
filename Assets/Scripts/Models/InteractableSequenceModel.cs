@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Components.InteractionComponents;
+using UnityEngine;
 using Utils;
 
 namespace Models
@@ -52,6 +53,9 @@ namespace Models
             {
                 return;
             }
+
+            Debug.Log($"Sequence is interacted state changed from {_isInteractedBufferValue} to " +
+                      $"{IsInteracted}");
 
             _isInteractedBufferValue = IsInteracted;
 
