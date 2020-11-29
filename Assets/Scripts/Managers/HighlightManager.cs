@@ -6,7 +6,7 @@ using Utils;
 
 namespace Managers
 {
-    public class HighlightManager : MonoBehaviour, IInitilizable
+    public class HighlightManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
         public Action<SelectableComponent> HighlightedObjectChanged = delegate {  };
 
@@ -60,10 +60,27 @@ namespace Managers
 
         public void Initialize()
         {
-            GameManager.Instance.SelectionManager.SelectedObjectChanged += OnSelectableComponentChanged;
+            Subscribe();
+        }
+        public void UnInitialize()
+        {
+            UnSubscribe();
         }
 
-        private void OnSelectableComponentChanged(SelectableComponent selectableComponent)
+        private void Subscribe()
+        {
+            GameManager.Instance.SelectionManager.SelectedObjectChanged += SelectionManagerOnSelectedObjectChanged;
+        }
+        private void UnSubscribe()
+        {
+            if (GameManager.Instance.SelectionManager != null &&
+                GameManager.Instance.SelectionManager.SelectedObjectChanged != null)
+            {
+                GameManager.Instance.SelectionManager.SelectedObjectChanged -= SelectionManagerOnSelectedObjectChanged;
+            }
+        }
+
+        private void SelectionManagerOnSelectedObjectChanged(SelectableComponent selectableComponent)
         {
             HighlightedObject = selectableComponent;
         }
@@ -85,7 +102,6 @@ namespace Managers
                 renderer.material = _highlightMaterial;
             }
         }
-
         private void UnHighlight(SelectableComponent selectableComponent)
         {
             if (selectableComponent == null)

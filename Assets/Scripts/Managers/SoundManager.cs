@@ -3,7 +3,7 @@ using Utils;
 
 namespace Managers
 {
-    public class SoundManager : MonoBehaviour, IInitilizable
+    public class SoundManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
         [SerializeField]
         private AudioSource _backgroundMusicAudioSourcePrefab;
@@ -17,6 +17,11 @@ namespace Managers
         {
             _backgroundMusicAudioSourceInstance = Instantiate(_backgroundMusicAudioSourcePrefab);
             _soundsAudioSourceInstance = Instantiate(_soundsAudioSourcePrefab);
+        }
+        public void UnInitialize()
+        {
+            Destroy(_soundsAudioSourceInstance);
+            Destroy(_backgroundMusicAudioSourceInstance);
         }
 
         public void PlaySound(AudioClip audioClip)

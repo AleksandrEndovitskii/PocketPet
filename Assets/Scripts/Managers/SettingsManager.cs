@@ -7,7 +7,7 @@ using Utils;
 
 namespace Managers
 {
-    public class SettingsManager : MonoBehaviour, IInitilizable
+    public class SettingsManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
         public event Action<string, float> ValueChanged = delegate { };
 
@@ -24,6 +24,10 @@ namespace Managers
         public void Initialize()
         {
             ResetSettingToDefault();
+        }
+        public void UnInitialize()
+        {
+
         }
 
         public float Get(string key)
@@ -50,6 +54,17 @@ namespace Managers
             ValueChanged.Invoke(key, PlayerPrefs.GetFloat(key));
         }
 
+        public void Save()
+        {
+            foreach (var keyValue in _currentValues)
+            {
+                Debug.Log($"{keyValue.Key} settings changed from {PlayerPrefs.GetFloat(keyValue.Key)} to " +
+                          $"{keyValue.Value}");
+
+                PlayerPrefs.SetFloat(keyValue.Key, keyValue.Value);
+            }
+        }
+
         private void ResetSettingToDefault()
         {
             foreach (var keyValue in _defaultValues)
@@ -61,17 +76,6 @@ namespace Managers
 
                     Set(keyValue.Key, keyValue.Value);
                 }
-            }
-        }
-
-        public void Save()
-        {
-            foreach (var keyValue in _currentValues)
-            {
-                Debug.Log($"{keyValue.Key} settings changed from {PlayerPrefs.GetFloat(keyValue.Key)} to " +
-                          $"{keyValue.Value}");
-
-                PlayerPrefs.SetFloat(keyValue.Key, keyValue.Value);
             }
         }
     }

@@ -7,7 +7,7 @@ using Utils;
 
 namespace Managers
 {
-    public class CursorLockingManager: MonoBehaviour, IInitilizable
+    public class CursorLockingManager: MonoBehaviour, IInitilizable, IUnInitializeble
     {
         public Action<CursorLockMode> SelectedCursorLockModeChanged = delegate {  };
 
@@ -41,6 +41,10 @@ namespace Managers
         public void Initialize()
         {
             SceneManager.activeSceneChanged += SceneManagerOnActiveSceneChanged;
+        }
+        public void UnInitialize()
+        {
+            SceneManager.activeSceneChanged -= SceneManagerOnActiveSceneChanged;
         }
 
         private void SceneManagerOnActiveSceneChanged(Scene previousScene, Scene currentScene)

@@ -9,7 +9,7 @@ using Utils;
 
 namespace Managers
 {
-    public class UserInterfaceManager : SerializedMonoBehaviour, IInitilizable
+    public class UserInterfaceManager : SerializedMonoBehaviour, IInitilizable, IUnInitializeble
     {
         [SerializeField]
         private Canvas _canvasPrefab;
@@ -27,7 +27,20 @@ namespace Managers
 
         public void Initialize()
         {
+            Subscribe();
+        }
+        public void UnInitialize()
+        {
+            UnSubscribe();
+        }
+
+        private void Subscribe()
+        {
             SceneManager.activeSceneChanged += SceneManagerOnActiveSceneChanged;
+        }
+        private void UnSubscribe()
+        {
+            SceneManager.activeSceneChanged -= SceneManagerOnActiveSceneChanged;
         }
 
         private void SceneManagerOnActiveSceneChanged(Scene previousScene, Scene currentScene)

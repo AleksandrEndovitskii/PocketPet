@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Utils;
 
 namespace Managers
@@ -13,7 +14,7 @@ namespace Managers
     [RequireComponent(typeof(InteractionManager))]
     [RequireComponent(typeof(AutoPlayManager))]
     [RequireComponent(typeof(UserInterfaceManager))]
-    public class GameManager : MonoBehaviour, IInitilizable
+    public class GameManager : MonoBehaviour, IInitilizable, IUnInitializeble
     {
         // static instance of GameManager which allows it to be accessed by any other script
         public static GameManager Instance;
@@ -46,6 +47,10 @@ namespace Managers
 
             Initialize();
         }
+        private void OnDestroy()
+        {
+            UnInitialize();
+        }
 
         public void Initialize()
         {
@@ -55,6 +60,15 @@ namespace Managers
             HighlightManager.Initialize();
             InteractionManager.Initialize();
             UserInterfaceManager.Initialize();
+        }
+        public void UnInitialize()
+        {
+            UserInterfaceManager.UnInitialize();
+            InteractionManager.Uninitialize();
+            HighlightManager.UnInitialize();
+            SoundManager.UnInitialize();
+            CursorLockingManager.UnInitialize();
+            SettingsManager.UnInitialize();
         }
     }
 }

@@ -44,9 +44,32 @@ namespace Managers
 
         public void Initialize()
         {
-            GameManager.Instance.SelectionManager.SelectedObjectChanged += SelectableComponentChanged;
+            Subscribe();
+        }
+        public void Uninitialize()
+        {
+            UnSubscribe();
+        }
 
-            GameManager.Instance.InputManager.KeyPressed += OnKeyPressed;
+        private void Subscribe()
+        {
+            GameManager.Instance.SelectionManager.SelectedObjectChanged += SelectionManagerOnSelectedObjectChanged;
+
+            GameManager.Instance.InputManager.KeyPressed += InputManagerOnKeyPressed;
+        }
+        private void UnSubscribe()
+        {
+            if (GameManager.Instance.SelectionManager != null &&
+                GameManager.Instance.SelectionManager.SelectedObjectChanged != null)
+            {
+                GameManager.Instance.SelectionManager.SelectedObjectChanged -= SelectionManagerOnSelectedObjectChanged;
+            }
+
+            if (GameManager.Instance.InputManager != null &&
+                GameManager.Instance.InputManager.KeyPressed != null)
+            {
+                GameManager.Instance.InputManager.KeyPressed -= InputManagerOnKeyPressed;
+            }
         }
 
         public void TrackInteractable(IInteractable interactable)
@@ -70,13 +93,7 @@ namespace Managers
             Interacted.Invoke(interactable);
         }
 
-        private void SelectableComponentChanged(SelectableComponent selectableComponent)
-        {
-            SelectedInteractable = GameManager.Instance.SelectionManager.SelectedObject?.gameObject
-                .GetComponent<IInteractable>();
-        }
-
-        private void OnKeyPressed(KeyCode keyCode)
+        private void InputManagerOnKeyPressed(KeyCode keyCode)
         {
             if (!_interactableKeyCodes.Contains(keyCode))
             {
@@ -84,6 +101,12 @@ namespace Managers
             }
 
             SelectedInteractable?.Interact();
+        }
+
+        private void SelectionManagerOnSelectedObjectChanged(SelectableComponent selectableComponent)
+        {
+            SelectedInteractable = GameManager.Instance.SelectionManager.SelectedObject?.gameObject
+                .GetComponent<IInteractable>();
         }
     }
 }
