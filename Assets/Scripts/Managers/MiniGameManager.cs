@@ -22,7 +22,7 @@ namespace Managers
         [SerializeField]
         private float _delayBeforeStartPlayNextUnPlayedSequenceSecondsCount;
         [SerializeField]
-        private string _sceneName;
+        private string _winSceneName;
         [SerializeField]
         private AudioClip _errorAudioClip;
 
@@ -109,7 +109,7 @@ namespace Managers
 
             Debug.Log($"Mini game is ended");
 
-            GameManager.Instance.SceneLoadingManager.LoadScene(_sceneName);
+            GameManager.Instance.SceneLoadingManager.LoadScene(_winSceneName);
         }
 
         private void PlayNextUnPlayedSequence()
