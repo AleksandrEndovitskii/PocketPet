@@ -12,6 +12,7 @@ namespace Managers
     [RequireComponent(typeof(HighlightManager))]
     [RequireComponent(typeof(InteractionManager))]
     [RequireComponent(typeof(AutoPlayManager))]
+    [RequireComponent(typeof(UserInterfaceManager))]
     public class GameManager : MonoBehaviour, IInitilizable
     {
         // static instance of GameManager which allows it to be accessed by any other script
@@ -26,6 +27,7 @@ namespace Managers
         public HighlightManager HighlightManager => this.gameObject.GetComponent<HighlightManager>();
         public InteractionManager InteractionManager => this.gameObject.GetComponent<InteractionManager>();
         public AutoPlayManager AutoPlayManager => this.gameObject.GetComponent<AutoPlayManager>();
+        public UserInterfaceManager UserInterfaceManager => this.gameObject.GetComponent<UserInterfaceManager>();
 
         private void Awake()
         {
@@ -52,6 +54,7 @@ namespace Managers
             SoundManager.Initialize();
             HighlightManager.Initialize();
             InteractionManager.Initialize();
+            UserInterfaceManager.Initialize();
         }
     }
 }
