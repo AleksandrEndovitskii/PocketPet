@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Linq;
 using Components.GameObjectComponents;
@@ -68,11 +68,11 @@ namespace Managers
 
         private void OnInteracted(IInteractable interactable)
         {
-            Debug.Log("Autoplay has interacted with interactable");
-
             // interacted via autoplay - do not need to mark it as interacted
             if (GameManager.Instance.AutoPlayManager.IsAutoplayOn)
             {
+                Debug.Log("Autoplay has interacted with interactable");
+
                 return;
             }
 
