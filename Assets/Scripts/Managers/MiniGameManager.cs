@@ -14,8 +14,6 @@ namespace Managers
         [SerializeField]
         private ObjectsInstantiatingComponent _ballsContainerPrefab;
         [SerializeField]
-        private Transform _ballsContainerParent;
-        [SerializeField]
         private int _startStepsCount;
         [SerializeField]
         private int _finishStepsCount;
@@ -26,7 +24,9 @@ namespace Managers
         [SerializeField]
         private AudioClip _errorAudioClip;
 
+        [NonSerialized]
         public ObjectsInstantiatingComponent BallsContainerInstance;
+
         private MiniGameModel _miniGameModel;
         private Coroutine _playNextUnPlayedSequenceAfterDelayCoroutine;
 
@@ -43,7 +43,9 @@ namespace Managers
 
         public void Initialize()
         {
-            BallsContainerInstance = Instantiate(_ballsContainerPrefab, _ballsContainerParent);
+            BallsContainerInstance = Instantiate(
+                _ballsContainerPrefab,
+                GameManager.Instance.UserInterfaceManager.CanvasInstance.transform);
 
             var interactableBlueprints = BallsContainerInstance.Instances.Select(x =>
                 x.GetComponent<IInteractable>()).ToList();

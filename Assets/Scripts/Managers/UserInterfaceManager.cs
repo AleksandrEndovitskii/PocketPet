@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -17,9 +18,12 @@ namespace Managers
         [SerializeField]
         private Dictionary<string, RectTransform> _sceneNameUserInterfacePrefabs = new Dictionary<string, RectTransform>();
 
-        private Canvas _canvasInstance;
-        private EventSystem _eventSystemInstance;
-        private RectTransform _userInterfaceInstance;
+        [NonSerialized]
+        public Canvas CanvasInstance;
+        [NonSerialized]
+        public EventSystem EventSystemInstance;
+        [NonSerialized]
+        public RectTransform UserInterfaceInstance;
 
         public void Initialize()
         {
@@ -40,9 +44,9 @@ namespace Managers
                 return;
             }
 
-            _canvasInstance = Instantiate(_canvasPrefab);
-            _eventSystemInstance = Instantiate(_eventSystemPrefab);
-            _userInterfaceInstance = Instantiate(keyValuePair.Value, _canvasInstance.transform);
+            CanvasInstance = Instantiate(_canvasPrefab);
+            EventSystemInstance = Instantiate(_eventSystemPrefab);
+            UserInterfaceInstance = Instantiate(keyValuePair.Value, CanvasInstance.transform);
         }
     }
 }
