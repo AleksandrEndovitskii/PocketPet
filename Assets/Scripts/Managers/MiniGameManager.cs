@@ -38,7 +38,7 @@ namespace Managers
 
             Debug.Log($"Mini game is started");
 
-            PlayNextUnPlayedSequence();
+            RestartPlayingOfNextUnPlayedSequence();
         }
 
         public void Initialize()
@@ -65,7 +65,7 @@ namespace Managers
                 return;
             }
 
-            PlayNextUnPlayedSequence();
+            RestartPlayingOfNextUnPlayedSequence();
         }
 
         private void OnInteracted(IInteractable interactable)
@@ -92,6 +92,8 @@ namespace Managers
 
                 _miniGameModel.FirstUnInteractedSequence.IsInteracted = false;
 
+                RestartPlayingOfNextUnPlayedSequence();
+
                 return;
             }
 
@@ -112,7 +114,7 @@ namespace Managers
             GameManager.Instance.SceneLoadingManager.LoadScene(_winSceneName);
         }
 
-        private void PlayNextUnPlayedSequence()
+        private void RestartPlayingOfNextUnPlayedSequence()
         {
             if (_playNextUnPlayedSequenceAfterDelayCoroutine != null)
             {
