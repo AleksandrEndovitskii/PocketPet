@@ -50,6 +50,9 @@ namespace Managers
 
         private void InstantiateUserInterfaceForCurrentScene(Scene currentScene)
         {
+            CanvasInstance = Instantiate(_canvasPrefab);
+            EventSystemInstance = Instantiate(_eventSystemPrefab);
+
             var keyValuePair = _sceneNameUserInterfacePrefabs.FirstOrDefault(x =>
                 x.Key == currentScene.name);
             if (keyValuePair.Key == null)
@@ -57,8 +60,6 @@ namespace Managers
                 return;
             }
 
-            CanvasInstance = Instantiate(_canvasPrefab);
-            EventSystemInstance = Instantiate(_eventSystemPrefab);
             UserInterfaceInstance = Instantiate(keyValuePair.Value, CanvasInstance.transform);
         }
     }

@@ -30,7 +30,7 @@ namespace Managers
         private MiniGameModel _miniGameModel;
         private Coroutine _playNextUnPlayedSequenceAfterDelayCoroutine;
 
-        private void Awake()
+        private void Start()
         {
             Initialize();
         }
