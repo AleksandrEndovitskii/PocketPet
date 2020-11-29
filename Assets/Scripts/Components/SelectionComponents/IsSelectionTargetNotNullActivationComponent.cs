@@ -15,7 +15,11 @@ namespace Components.SelectionComponents
         }
         private void OnDestroy()
         {
-            GameManager.Instance.SelectionManager.SelectedObjectChanged -= OnSelectedObjectChanged;
+            if (GameManager.Instance != null &&
+                GameManager.Instance.SelectionManager != null)
+            {
+                GameManager.Instance.SelectionManager.SelectedObjectChanged -= OnSelectedObjectChanged;
+            }
         }
 
         private void OnSelectedObjectChanged(SelectableComponent selectableComponent)
