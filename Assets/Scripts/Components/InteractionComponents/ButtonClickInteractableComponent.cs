@@ -26,7 +26,8 @@ namespace Components.InteractionComponents
         {
             _button.onClick.RemoveListener(ButtonOnClick);
 
-            if (GameManager.Instance.InteractionManager != null)
+            if (GameManager.Instance != null &&
+                GameManager.Instance.InteractionManager != null)
             {
                 GameManager.Instance.InteractionManager.UnTrackInteractable(this);
             }
