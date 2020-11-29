@@ -50,4 +50,5 @@ MonoBehaviour:
   _finishStepsCount: 9
   _delayBeforeStartPlayNextUnPlayedSequenceSecondsCount: 3
   _sceneName: Lobby
+  _errorAudioClip: {fileID: 8300000, guid: fb916bfb60d4851499ae99f552ba479c, type: 3}
   BallsContainerInstance: {fileID: 0}

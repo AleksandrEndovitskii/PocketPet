@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
 using Components.GameObjectComponents;
@@ -23,6 +23,8 @@ namespace Managers
         private float _delayBeforeStartPlayNextUnPlayedSequenceSecondsCount;
         [SerializeField]
         private string _sceneName;
+        [SerializeField]
+        private AudioClip _errorAudioClip;
 
         public ObjectsInstantiatingComponent BallsContainerInstance;
         private MiniGameModel _miniGameModel;
@@ -85,6 +87,8 @@ namespace Managers
             if (interactable != _miniGameModel.FirstUnInteractedInteractable.Interactable)
             {
                 Debug.Log("Player has interacted with wrong interactable - restarting last un-played sequence");
+
+                GameManager.Instance.SoundManager.PlaySound(_errorAudioClip);
 
                 _miniGameModel.FirstUnInteractedSequence.IsInteracted = false;
 
