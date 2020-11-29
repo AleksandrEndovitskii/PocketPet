@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 using Utils;
@@ -15,6 +16,8 @@ namespace Managers
         [SerializeField]
         private List<KeyValue> _defaultValues = new List<KeyValue>();
 
+        private List<KeyValue> _currentValues = new List<KeyValue>();
+
         private AudioSource _backgroundMusicAudioSourceInstance;
         private AudioSource _soundsAudioSourceInstance;
 
@@ -29,9 +32,17 @@ namespace Managers
         }
         public void Set(string key, float value)
         {
-            Debug.Log($"{key} settings changed from {PlayerPrefs.GetFloat(key)} to {value}");
+            var keyValue = _currentValues.FirstOrDefault(x=>x.Key == key);
+            if (keyValue != null)
+            {
+                keyValue.Value = value;
+            }
+            else
+            {
+                keyValue = new KeyValue(key, value);
 
-            PlayerPrefs.SetFloat(key, value);
+                _currentValues.Add(keyValue);
+            }
 
             //TODO: move logic for audio settings to audio settings manager
             _audioMixer.SetFloat(key, value);
@@ -41,14 +52,26 @@ namespace Managers
 
         private void ResetSettingToDefault()
         {
-            foreach (var keyValuePair in _defaultValues)
+            foreach (var keyValue in _defaultValues)
             {
-                if (!PlayerPrefs.HasKey(keyValuePair.Key))
+                if (!PlayerPrefs.HasKey(keyValue.Key))
                 {
-                    Debug.Log($"Value for {keyValuePair.Key} was not specified - resetting it to default value({keyValuePair.Value})");
+                    Debug.Log($"Value for {keyValue.Key} was not specified - " +
+                              $"resetting it to default value({keyValue.Value})");
 
-                    Set(keyValuePair.Key, keyValuePair.Value);
+                    Set(keyValue.Key, keyValue.Value);
                 }
+            }
+        }
+
+        public void Save()
+        {
+            foreach (var keyValue in _currentValues)
+            {
+                Debug.Log($"{keyValue.Key} settings changed from {PlayerPrefs.GetFloat(keyValue.Key)} to " +
+                          $"{keyValue.Value}");
+
+                PlayerPrefs.SetFloat(keyValue.Key, keyValue.Value);
             }
         }
     }

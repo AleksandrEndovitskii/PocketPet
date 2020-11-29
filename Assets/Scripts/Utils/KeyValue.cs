@@ -7,5 +7,11 @@ namespace Utils
     {
         public string Key;
         public float Value;
+
+        public KeyValue(string key, float value)
+        {
+            Key = key;
+            Value = value;
+        }
     }
 }
