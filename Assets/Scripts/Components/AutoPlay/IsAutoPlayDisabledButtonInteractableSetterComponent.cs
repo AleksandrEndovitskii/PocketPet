@@ -21,7 +21,8 @@ namespace Components.AutoPlay
         }
         private void OnDestroy()
         {
-            if (GameManager.Instance.AutoPlayManager != null)
+            if (GameManager.Instance != null &&
+                GameManager.Instance.AutoPlayManager != null)
             {
                 GameManager.Instance.AutoPlayManager.IsAutoplayOnChanged -= OnIsAutoplayOnChanged;
             }
